@@ -198,11 +198,15 @@
                 <div className="flex flex-col items-center space-y-4 w-full md:w-auto">
                   <div className="relative">
                     <div className="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-b from-[#57cbde] to-[#2a475e] p-[2px] rounded-none shadow-lg">
+                       {/* WICHTIG: Wenn du dein eigenes GIF nutzen willst:
+                           1. Nenne deine Datei um in 'avatar.gif' oder 'logo.gif'
+                           2. Lege sie in denselben Ordner wie diese index.html
+                           3. Ändere src unten zu: src="./avatar.gif" 
+                       */}
                        <img 
-                         src="./IMG_0464.GIF" 
+                         src="https://media1.tenor.com/m/yheo1GGu3FwAAAAC/rick-roll-rick-astley.gif" 
                          onError={(e) => {
                            e.target.src = "https://api.dicebear.com/7.x/avataaars/svg?seed=Domse321&backgroundColor=171a21";
-                           e.target.alt = "Placeholder Avatar";
                          }}
                          alt="Domse321 Avatar" 
                          className="w-full h-full bg-[#171a21] object-cover" 
@@ -404,10 +408,10 @@
                   {/* UPDATED: Logo Image + Title, Clickable to Scroll Top */}
                   <a href="#home" className="flex items-center gap-3 group cursor-pointer">
                      <img 
-                        src="./png-clipart-rust-scrap-recycling-material-metal-others-miscellaneous-blueprint.png" 
+                        src="https://rustlabs.com/img/items180/gears.png" 
                         alt="Logo" 
                         className="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-300"
-                        onError={(e) => e.target.style.display = 'none'} // Hide if broken
+                        /* FÜR GITHUB: Wenn du dein eigenes Bild nutzen willst, ändere src oben zu "./logo.png" */
                      />
                      <div className="flex flex-col">
                        <div className="text-2xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 font-mono flex items-center gap-2">
