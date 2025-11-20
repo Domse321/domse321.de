@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code & Play Portfolio</title>
+    <title>LOGIC & LOOT | Domse321 Portfolio</title>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -28,6 +30,7 @@
             background-color: #020617; /* slate-950 */
             color: white;
             font-family: sans-serif;
+            scroll-behavior: smooth;
         }
         @keyframes blob {
           0% { transform: translate(0px, 0px) scale(1); }
@@ -50,12 +53,29 @@
           -webkit-backdrop-filter: blur(8px);
           border: 1px solid rgba(255, 255, 255, 0.05);
         }
+        
+        /* Verbesserte Fade-In Animationen mit Delays */
         .animate-fadeIn {
-            animation: fadeIn 0.5s ease-out forwards;
+            animation: fadeIn 0.6s ease-out forwards;
+            opacity: 0; /* Start unsichtbar */
         }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Scanline Animation für den Footer */
+        @keyframes scanline {
+            0% { transform: translateY(-100%); opacity: 0; }
+            50% { opacity: 0.5; }
+            100% { transform: translateY(200%); opacity: 0; }
+        }
+        .animate-scan {
+            animation: scanline 3s linear infinite;
         }
         
         /* Custom Scrollbar */
@@ -80,7 +100,7 @@
     <script type="text/babel" data-type="module">
         import React, { useState, useEffect, useRef } from 'react';
         import { createRoot } from 'react-dom/client';
-        import { Play, Terminal, User, Mail, Github, Youtube, Twitch, ExternalLink, ChevronDown, Menu, X, Gamepad2, Clapperboard, Clock, Trophy, Sparkles, Loader2, Bot, MessageSquare } from 'lucide-react';
+        import { Play, Terminal, User, Mail, Github, Youtube, Twitch, ExternalLink, ChevronDown, Menu, X, Gamepad2, Clapperboard, Clock, Trophy, Sparkles, Loader2, Bot, MessageSquare, Send, Radio } from 'lucide-react';
 
         // --- GEMINI API CONFIGURATION ---
         // HIER DEINEN API KEY EINFÜGEN
@@ -131,7 +151,7 @@
             );
             if (ref.current) observer.observe(ref.current);
             return () => {
-              if (ref.current) observer.unobserve(ref.current); // Fix: entry.target zu ref.current
+              if (ref.current) observer.unobserve(ref.current); 
             };
           }, []);
 
@@ -178,12 +198,11 @@
                 <div className="flex flex-col items-center space-y-4 w-full md:w-auto">
                   <div className="relative">
                     <div className="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-b from-[#57cbde] to-[#2a475e] p-[2px] rounded-none shadow-lg">
-                       {/* BILD: Hier wird dein hochgeladenes GIF erwartet */}
                        <img 
                          src="./IMG_0464.GIF" 
                          onError={(e) => {
                            e.target.src = "https://api.dicebear.com/7.x/avataaars/svg?seed=Domse321&backgroundColor=171a21";
-                           e.target.alt = "Placeholder Avatar (Upload IMG_0464.GIF to fix)";
+                           e.target.alt = "Placeholder Avatar";
                          }}
                          alt="Domse321 Avatar" 
                          className="w-full h-full bg-[#171a21] object-cover" 
@@ -382,9 +401,21 @@
               
               <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'glass-nav py-4' : 'py-6 bg-transparent'}`}>
                 <div className="container mx-auto px-6 flex justify-between items-center">
-                  <div className="text-2xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 font-mono">
-                    &lt;Code & Play /&gt;
-                  </div>
+                  {/* UPDATED: Logo Image + Title, Clickable to Scroll Top */}
+                  <a href="#home" className="flex items-center gap-3 group cursor-pointer">
+                     <img 
+                        src="./png-clipart-rust-scrap-recycling-material-metal-others-miscellaneous-blueprint.png" 
+                        alt="Logo" 
+                        className="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-300"
+                        onError={(e) => e.target.style.display = 'none'} // Hide if broken
+                     />
+                     <div className="flex flex-col">
+                       <div className="text-2xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 font-mono flex items-center gap-2">
+                         <span>LOGIC & LOOT</span>
+                         <span className="animate-pulse text-xs bg-purple-500/20 px-1 rounded text-purple-400 border border-purple-500/30">BETA</span>
+                       </div>
+                     </div>
+                  </a>
                   
                   <div className="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
                     <a href="#home" className="hover:text-white transition-colors">Intro</a>
@@ -420,36 +451,34 @@
                 <div className="absolute top-20 right-0 w-96 h-96 bg-cyan-600 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-blob animation-delay-2000"></div>
 
                 <div className="container mx-auto text-center relative z-10">
-                  <RevealOnScroll>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-semibold tracking-wider text-cyan-300 uppercase bg-cyan-900/20 rounded-full border border-cyan-500/20">
-                      <Gamepad2 size={14} /> Hobbyist & Creator
-                    </div>
-                  </RevealOnScroll>
+                  {/* UPDATED: Sofort sichtbar, kein Scroll Reveal */}
+                  <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-semibold tracking-wider text-cyan-300 uppercase bg-cyan-900/20 rounded-full border border-cyan-500/20 animate-fadeIn">
+                    <Gamepad2 size={14} /> Hobbyist & Creator
+                  </div>
                   
-                  <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 animate-fadeIn">
+                  {/* UPDATED: Sofort sichtbar */}
+                  <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 animate-fadeIn delay-100">
                     Gaming, Edits <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-400 to-emerald-400">
                       & Code Snippets.
                     </span>
                   </h1>
 
-                  <RevealOnScroll delay={200}>
-                    <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 mb-10 leading-relaxed">
-                      Kein Business, nur Leidenschaft. Hier landen meine kreativen Video-Projekte
-                      und die kleinen Skripte, die ich schreibe, um mir das Leben leichter zu machen.
-                    </p>
-                  </RevealOnScroll>
+                  {/* UPDATED: Sofort sichtbar, nur mit Verzögerung */}
+                  <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 mb-10 leading-relaxed animate-fadeIn delay-200">
+                    Kein Business, nur Leidenschaft. Hier landen meine kreativen Video-Projekte
+                    und die kleinen Skripte, die ich schreibe, um mir das Leben leichter zu machen.
+                  </p>
 
-                  <RevealOnScroll delay={300}>
-                    <div className="flex flex-col sm:flex-row justify-center gap-4">
-                      <a href="#videos" className="px-8 py-4 rounded-full bg-white text-slate-900 font-bold hover:bg-slate-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center justify-center gap-2">
-                        <Play size={18} fill="currentColor" /> Videos ansehen
-                      </a>
-                      <a href="#steam" className="px-8 py-4 rounded-full bg-[#171a21] text-[#66c0f4] font-bold hover:bg-[#1b2838] transition-all border border-[#66c0f4]/30 flex items-center justify-center gap-2">
-                        <Gamepad2 size={18} /> Steam Status
-                      </a>
-                    </div>
-                  </RevealOnScroll>
+                  {/* UPDATED: Sofort sichtbar, nur mit Verzögerung */}
+                  <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fadeIn delay-300">
+                    <a href="#videos" className="px-8 py-4 rounded-full bg-white text-slate-900 font-bold hover:bg-slate-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center justify-center gap-2">
+                      <Play size={18} fill="currentColor" /> Videos ansehen
+                    </a>
+                    <a href="#steam" className="px-8 py-4 rounded-full bg-[#171a21] text-[#66c0f4] font-bold hover:bg-[#1b2838] transition-all border border-[#66c0f4]/30 flex items-center justify-center gap-2">
+                      <Gamepad2 size={18} /> Steam Status
+                    </a>
+                  </div>
                 </div>
 
                 <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-slate-500">
@@ -639,27 +668,63 @@
                 </div>
               </section>
 
-              <footer className="py-12 border-t border-slate-800 bg-slate-950">
-                <div className="container mx-auto px-6 text-center md:text-left flex flex-col md:flex-row justify-between items-center gap-6">
-                  <div>
-                     <div className="text-xl font-bold text-slate-200">Connect</div>
-                     <p className="text-slate-500 text-sm mt-1">Schreib mir auf Discord oder Social Media.</p>
-                  </div>
-                  
-                  <div className="flex gap-6">
-                    <a href="#" className="p-3 rounded-full bg-slate-900 hover:bg-[#5865F2] hover:text-white transition-all text-slate-400" title="Discord">
-                      <User size={20} />
-                    </a>
-                    <a href="#" className="p-3 rounded-full bg-slate-900 hover:bg-black hover:text-white transition-all text-slate-400" title="Github">
-                      <Github size={20} />
-                    </a>
-                    <a href="#" className="p-3 rounded-full bg-slate-900 hover:bg-[#FF0000] hover:text-white transition-all text-slate-400" title="YouTube">
-                      <Youtube size={20} />
-                    </a>
-                  </div>
-                </div>
-                <div className="mt-8 text-center text-slate-700 text-xs">
-                  Built for fun, not for profit. Powered by Gemini AI.
+              {/* UPDATED: Holographic Connect Footer */}
+              <footer className="py-20 border-t border-slate-800 bg-[#020617] relative overflow-hidden">
+                <div className="container mx-auto px-6">
+                   <RevealOnScroll>
+                     <div className="relative group overflow-hidden rounded-xl bg-slate-900/50 border border-indigo-500/30 p-8 md:p-12 transition-all hover:border-indigo-500/60 hover:shadow-[0_0_30px_rgba(99,102,241,0.1)]">
+                        {/* Animated Background Scanline */}
+                        <div className="absolute inset-0 pointer-events-none opacity-10 bg-[linear-gradient(transparent_0%,#6366f1_50%,transparent_100%)] bg-[length:100%_4px] animate-scan"></div>
+                        <div className="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        
+                        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                           <div className="text-center md:text-left">
+                              <div className="flex items-center justify-center md:justify-start gap-2 text-indigo-400 mb-2">
+                                 <Radio className="animate-pulse" size={16} />
+                                 <span className="text-xs font-mono tracking-[0.2em] uppercase">Transmission Active</span>
+                              </div>
+                              <h2 className="text-3xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 mb-4">
+                                 INITIATE CONTACT
+                              </h2>
+                              <p className="text-slate-400 max-w-md mx-auto md:mx-0">
+                                 Hast du eine Quest, ein Projekt oder willst einfach nur nerden?
+                                 Mein Kommunikationskanal ist offen.
+                              </p>
+                           </div>
+                           
+                           <div className="flex gap-4">
+                              <a href="#" className="group/icon relative p-4 rounded-lg bg-slate-950 border border-indigo-500/30 hover:border-indigo-400 hover:bg-indigo-500/10 transition-all overflow-hidden">
+                                 <div className="absolute inset-0 bg-indigo-500/20 translate-y-full group-hover/icon:translate-y-0 transition-transform duration-300"></div>
+                                 <User className="relative z-10 text-slate-400 group-hover/icon:text-white" size={24} />
+                              </a>
+                              <a href="#" className="group/icon relative p-4 rounded-lg bg-slate-950 border border-indigo-500/30 hover:border-indigo-400 hover:bg-indigo-500/10 transition-all overflow-hidden">
+                                 <div className="absolute inset-0 bg-indigo-500/20 translate-y-full group-hover/icon:translate-y-0 transition-transform duration-300"></div>
+                                 <Github className="relative z-10 text-slate-400 group-hover/icon:text-white" size={24} />
+                              </a>
+                              <a href="#" className="group/icon relative p-4 rounded-lg bg-slate-950 border border-indigo-500/30 hover:border-indigo-400 hover:bg-indigo-500/10 transition-all overflow-hidden">
+                                 <div className="absolute inset-0 bg-indigo-500/20 translate-y-full group-hover/icon:translate-y-0 transition-transform duration-300"></div>
+                                 <Youtube className="relative z-10 text-slate-400 group-hover/icon:text-white" size={24} />
+                              </a>
+                           </div>
+                        </div>
+
+                        {/* Decorative Corners */}
+                        <div className="absolute top-0 left-0 w-8 h-8 border-l-2 border-t-2 border-indigo-500/50 rounded-tl"></div>
+                        <div className="absolute top-0 right-0 w-8 h-8 border-r-2 border-t-2 border-indigo-500/50 rounded-tr"></div>
+                        <div className="absolute bottom-0 left-0 w-8 h-8 border-l-2 border-b-2 border-indigo-500/50 rounded-bl"></div>
+                        <div className="absolute bottom-0 right-0 w-8 h-8 border-r-2 border-b-2 border-indigo-500/50 rounded-br"></div>
+                     </div>
+                   </RevealOnScroll>
+                   
+                   <div className="mt-12 text-center">
+                      <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-900 border border-slate-800 text-xs text-slate-500 font-mono">
+                         <span>SYSTEM: ONLINE</span>
+                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      </div>
+                      <p className="mt-4 text-xs text-slate-700 font-mono">
+                         LOGIC & LOOT // Domse321 // {new Date().getFullYear()}
+                      </p>
+                   </div>
                 </div>
               </footer>
             </div>
