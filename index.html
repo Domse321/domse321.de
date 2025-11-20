@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LOGIC & LOOT | Domse321 Portfolio</title>
     
+    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
     
     <!-- Tailwind CSS -->
@@ -198,15 +199,12 @@
                 <div className="flex flex-col items-center space-y-4 w-full md:w-auto">
                   <div className="relative">
                     <div className="w-32 h-32 md:w-40 md:h-40 bg-gradient-to-b from-[#57cbde] to-[#2a475e] p-[2px] rounded-none shadow-lg">
-                       {/* WICHTIG: Wenn du dein eigenes GIF nutzen willst:
-                           1. Nenne deine Datei um in 'avatar.gif' oder 'logo.gif'
-                           2. Lege sie in denselben Ordner wie diese index.html
-                           3. Ändere src unten zu: src="./avatar.gif" 
-                       */}
+                       {/* BILD: Nutzt jetzt deine ppsteam.GIF Datei */}
                        <img 
-                         src="https://media1.tenor.com/m/yheo1GGu3FwAAAAC/rick-roll-rick-astley.gif" 
+                         src="./ppsteam.GIF" 
                          onError={(e) => {
                            e.target.src = "https://api.dicebear.com/7.x/avataaars/svg?seed=Domse321&backgroundColor=171a21";
+                           e.target.alt = "Placeholder Avatar";
                          }}
                          alt="Domse321 Avatar" 
                          className="w-full h-full bg-[#171a21] object-cover" 
@@ -258,7 +256,8 @@
                       {/* Rust */}
                       <div className="bg-[#1b2838]/50 p-3 flex items-center gap-4 hover:bg-[#2a475e]/40 transition-colors cursor-default group/game border-l-2 border-transparent hover:border-[#57cbde]">
                          <div className="w-24 h-10 bg-slate-700 overflow-hidden relative shadow-md">
-                            <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/252490/header.jpg" alt="Rust" className="w-full h-full object-cover opacity-90 group-hover/game:opacity-100 transition-opacity" />
+                            {/* BILD: Nutzt jetzt deine rust.jpg Datei */}
+                            <img src="./rust.jpg" alt="Rust" className="w-full h-full object-cover opacity-90 group-hover/game:opacity-100 transition-opacity" />
                          </div>
                          <div className="flex-grow">
                             <div className="text-[#c6d4df] font-bold group-hover/game:text-white transition-colors">Rust</div>
@@ -274,7 +273,8 @@
                       {/* Arc Raiders */}
                       <div className="bg-[#1b2838]/50 p-3 flex items-center gap-4 hover:bg-[#2a475e]/40 transition-colors cursor-default group/game border-l-2 border-transparent hover:border-[#57cbde]">
                          <div className="w-24 h-10 bg-slate-700 overflow-hidden relative shadow-md">
-                            <img src="https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/1808500/header.jpg" alt="Arc Raiders" className="w-full h-full object-cover opacity-90 group-hover/game:opacity-100 transition-opacity" />
+                             {/* BILD: Nutzt jetzt deine arcraiders.jpeg Datei */}
+                            <img src="./arcraiders.jpeg" alt="Arc Raiders" className="w-full h-full object-cover opacity-90 group-hover/game:opacity-100 transition-opacity" />
                          </div>
                          <div className="flex-grow">
                             <div className="text-[#c6d4df] font-bold group-hover/game:text-white transition-colors">Arc Raiders</div>
@@ -407,11 +407,12 @@
                 <div className="container mx-auto px-6 flex justify-between items-center">
                   {/* UPDATED: Logo Image + Title, Clickable to Scroll Top */}
                   <a href="#home" className="flex items-center gap-3 group cursor-pointer">
+                     {/* BILD: Nutzt jetzt deine Titel.png Datei */}
                      <img 
-                        src="https://rustlabs.com/img/items180/gears.png" 
+                        src="./Titel.png" 
                         alt="Logo" 
                         className="w-10 h-10 object-contain group-hover:rotate-12 transition-transform duration-300"
-                        /* FÜR GITHUB: Wenn du dein eigenes Bild nutzen willst, ändere src oben zu "./logo.png" */
+                        onError={(e) => e.target.style.display = 'none'} 
                      />
                      <div className="flex flex-col">
                        <div className="text-2xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400 font-mono flex items-center gap-2">
@@ -455,12 +456,10 @@
                 <div className="absolute top-20 right-0 w-96 h-96 bg-cyan-600 rounded-full mix-blend-multiply filter blur-[100px] opacity-20 animate-blob animation-delay-2000"></div>
 
                 <div className="container mx-auto text-center relative z-10">
-                  {/* UPDATED: Sofort sichtbar, kein Scroll Reveal */}
                   <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 text-xs font-semibold tracking-wider text-cyan-300 uppercase bg-cyan-900/20 rounded-full border border-cyan-500/20 animate-fadeIn">
                     <Gamepad2 size={14} /> Hobbyist & Creator
                   </div>
                   
-                  {/* UPDATED: Sofort sichtbar */}
                   <h1 className="text-5xl md:text-7xl lg:text-8xl font-extrabold tracking-tight mb-6 animate-fadeIn delay-100">
                     Gaming, Edits <br />
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-cyan-400 to-emerald-400">
@@ -468,13 +467,11 @@
                     </span>
                   </h1>
 
-                  {/* UPDATED: Sofort sichtbar, nur mit Verzögerung */}
                   <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 mb-10 leading-relaxed animate-fadeIn delay-200">
                     Kein Business, nur Leidenschaft. Hier landen meine kreativen Video-Projekte
                     und die kleinen Skripte, die ich schreibe, um mir das Leben leichter zu machen.
                   </p>
 
-                  {/* UPDATED: Sofort sichtbar, nur mit Verzögerung */}
                   <div className="flex flex-col sm:flex-row justify-center gap-4 animate-fadeIn delay-300">
                     <a href="#videos" className="px-8 py-4 rounded-full bg-white text-slate-900 font-bold hover:bg-slate-200 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)] flex items-center justify-center gap-2">
                       <Play size={18} fill="currentColor" /> Videos ansehen
